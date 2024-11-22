@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evaluación de Java</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Evaluación de Java</h1>
+        <nav>
+            <ul class="menu">
+                <li><a href="index.html">Página Principal</a></li>
+                <li><a href="curso.html">Curso</a></li>
+                <li><a href="evaluacion.html">Evaluación</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h2>Responde las siguientes preguntas</h2>
+        <form id="quiz-form">
+            <!-- Pregunta 1 -->
+            <div>
+                <p>1. ¿Qué es Java?</p>
+                <input type="radio" name="q1" value="1"> Lenguaje de programación<br>
+                <input type="radio" name="q1" value="0"> Sistema operativo<br>
+            </div>
+
+            <!-- Pregunta 2 -->
+            <div>
+                <p>2. Selecciona conceptos relacionados:</p>
+                <input type="checkbox" name="q2" value="1"> Clases<br>
+                <input type="checkbox" name="q2" value="1"> Métodos<br>
+            </div>
+
+            <!-- Pregunta 3 -->
+            <div>
+                <p>3. ¿Cuál es el tipo de dato para texto?</p>
+                <select name="q3">
+                    <option value="0">int</option>
+                    <option value="1">String</option>
+                </select>
+            </div>
+
+            <!-- Pregunta 4 -->
+            <div>
+                <p>4. Escribe el método principal:</p>
+                <input type="text" name="q4" placeholder="Respuesta">
+            </div>
+
+            <!-- Pregunta 5 -->
+            <div>
+                <p>5. Operador para comparar valores:</p>
+                <input type="radio" name="q5" value="1"> ==<br>
+                <input type="radio" name="q5" value="0"> =<br>
+            </div>
+
+            <button type="button" onclick="calcularPuntaje()">Enviar</button>
+        </form>
+        <div id="resultado"></div>
+    </main>
+    <footer>
+        <p>&copy; Estuardo Alexander López Salvatierra --- 2024 Aprendizaje de Java</p>
+    </footer>
+    <script>
+        function calcularPuntaje() {
+            const form = document.getElementById('quiz-form');
+            const respuestas = new FormData(form);
+            let puntaje = 0;
+    
+            if (respuestas.get('q1') === '1') puntaje += 1; // Pregunta 1
+            if (respuestas.getAll('q2').includes('1')) puntaje += respuestas.getAll('q2').length; // Pregunta 2 (Checkbox)
+            if (respuestas.get('q3') === '1') puntaje += 1; // Pregunta 3
+            if (respuestas.get('q4')?.toLowerCase() === 'main') puntaje += 1; // Pregunta 4
+            if (respuestas.get('q5') === '1') puntaje += 1; // Pregunta 5
+    
+            // Mostrar resultado
+            document.getElementById('resultado').innerHTML = `Tu puntaje es: ${puntaje}/5`;
+        }
+    </script>
+</body>
+</html>
